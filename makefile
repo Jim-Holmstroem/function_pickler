@@ -1,6 +1,6 @@
 clean:
-	find . -name '*.pyc' | xargs rm
-	find . -name '*.pyo' | xargs rm
+	find . -name '*.pyc' -delete
+	find . -name '*.pyo' -delete
 
 install: test
 	python setup.py install
