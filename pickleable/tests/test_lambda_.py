@@ -1,10 +1,10 @@
 from __future__ import division, print_function
 
 from itertools import (
-    repeat,
+    chain,
     imap,
     product,
-    chain,
+    repeat,
 )
 
 from nose.tools import (
