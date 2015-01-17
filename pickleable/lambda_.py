@@ -21,7 +21,7 @@ class Lambda(object):
         self.lambda_ = lambda_
         self.context = context
 
-    def __getatttr__(self, name):
+    def __getattr__(self, name):
         """Transparency
         """
         return getattr(self.lambda_, name)

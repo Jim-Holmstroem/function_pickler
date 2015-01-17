@@ -26,7 +26,7 @@ class Code(object):
     def __init__(self, code):
         self.code = code
 
-    def __getatttr__(self, name):
+    def __getattr__(self, name):
         """Transparency
         """
         return getattr(self.code, name)
