@@ -1,7 +1,5 @@
 from __future__ import division, print_function
 
-import types
-
 from itertools import (
     chain,
     imap,
@@ -24,7 +22,7 @@ def test_module():
 
     def valid_pickling(pickler, module):
         assert_equals(
-            pickler(Module(module)),
+            pickler(Module(module))._module,
             module,
         )
 

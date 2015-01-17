@@ -81,7 +81,9 @@ class Module(Base):
             fromlist=['not empty'],
         )
 
-        same_version = state.module_version == self._version(module)
+        same_version = (
+            state.module_version == state.get_version(module)
+        )
 
         if state.verify_version and not(same_version):
             raise VersionMismatchException(
