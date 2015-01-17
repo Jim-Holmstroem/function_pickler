@@ -1,9 +1,16 @@
 from __future__ import division, print_function
 
 from itertools import product, starmap
+from functools import wraps
+
+from nose.tools import (
+    nottest,
+)
+
+from pickleable.utils import Base
 
 
-picklers = map(
+pickle_modules = map(
     __import__,
     [
         "pickle",
@@ -14,7 +21,7 @@ picklers = map(
 protocols = range(3)
 
 
-class Pickling(object):
+class Pickler(Base):
     def __init__(self, pickler, protocol):
         self.pickler = pickler
         self.protocol = protocol
@@ -27,27 +34,21 @@ class Pickling(object):
             )
         )
 
-    def __repr__(self):
-        return "{}({}, {})".format(
-            self.__class__.__name__,
-            "{}={}".format(
-                "pickler",
-                self.pickler,
-            ),
-            "{}={}".format(
-                "protocol",
-                self.protocol,
-            ),
-        )
 
-    def __str__(self):
-        return self.__repr__()
-
-
-picklings = list(starmap(
-    Pickling,
+picklers = list(starmap(
+    Pickler,
     product(
-        picklers,
+        pickle_modules,
         protocols
     )
 ))
+
+
+@nottest
+def testify(f):
+    @wraps(f)
+    def _f(*args, **kwargs):
+        for test in f(*args, **kwargs):
+            yield test
+
+    return _f
