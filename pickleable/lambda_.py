@@ -27,6 +27,9 @@ class Lambda(object):
         """
         return getattr(self.lambda_, name)
 
+    def __call__(self, *args, **kwargs):
+        return self.lambda_(*args, **kwargs)
+
     def __getstate__(self):
         state = State(
             code=Code(self.func_code),
