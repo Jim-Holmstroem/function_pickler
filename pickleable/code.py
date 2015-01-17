@@ -27,12 +27,12 @@ State = namedtuple(
 
 class Code(Base):
     def __init__(self, code):
-        self.code = code
+        self._code = code
 
     def __getattr__(self, name):
         """Transparency
         """
-        return getattr(self.code, name)
+        return getattr(self._code, name)
 
     def __getstate__(self):
         state = State(
@@ -53,7 +53,7 @@ class Code(Base):
         return state
 
     def __setstate__(self, state):
-        self.code = types.CodeType(
+        self._code = types.CodeType(
             state.argcount,
             state.nlocals,
             state.stacksize,

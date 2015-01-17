@@ -20,31 +20,30 @@ State = namedtuple(
 
 class Lambda(Base):
     def __init__(self, lambda_, context={}):
-        self.lambda_ = lambda_
-        self.context = context
+        self._lambda = lambda_
+        self._context = context
 
     def __getattr__(self, name):
         """Transparency
         """
-        return getattr(self.lambda_, name)
+        return getattr(self._lambda, name)
 
     def __call__(self, *args, **kwargs):
-        print(self.__dict__)
-        return self.lambda_(*args, **kwargs)
+        return self._lambda(*args, **kwargs)
 
     def __getstate__(self):
         state = State(
             code=Code(self.func_code),
             name=self.func_name,
             argdefs=self.func_defaults,
-            context=self.context,
+            context=self._context,
         )
 
         return state
 
     def __setstate__(self, state):
-        self.lambda_ = types.LambdaType(
-            code=state.code.code,
+        self._lambda = types.LambdaType(
+            code=state.code._code,
             globals=state.context,
             name=state.name,
             argdefs=state.argdefs,
