@@ -41,7 +41,7 @@ class Code(object):
             codestring=self.co_code,
             constants=self.co_consts,
             names=self.co_names,
-            varnames=self.varnames,
+            varnames=self.co_varnames,
             filename=self.co_filename,
             name=self.co_name,
             firstlineno=self.co_firstlineno,
