@@ -6,17 +6,18 @@ import types
 from pickleable.code import Code
 
 
-class Lambda(object):
-    State = namedtuple(
-        'State',
-        (
-            'code',
-            'name',
-            'argdefs',
-            'context',
-        )
+State = namedtuple(
+    'State',
+    (
+        'code',
+        'name',
+        'argdefs',
+        'context',
     )
+)
 
+
+class Lambda(object):
     def __init__(self, lambda_, context={}):
         self.lambda_ = lambda_
         self.context = context
@@ -27,7 +28,7 @@ class Lambda(object):
         return getattr(self.lambda_, name)
 
     def __getstate__(self):
-        state = Lambda.State(
+        state = State(
             code=Code(self.func_code),
             name=self.func_name,
             argdefs=self.func_defaults,

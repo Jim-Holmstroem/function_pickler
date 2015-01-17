@@ -4,25 +4,26 @@ from collections import namedtuple
 import types
 
 
-class Code(object):
-    State = namedtuple(
-        'State',
-        (
-            'argcount',
-            'nlocals',
-            'stacksize',
-            'flags',
-            'codestring',
-            'constants',
-            'names',
-            'varnames',
-            'filename',
-            'name',
-            'firstlineno',
-            'lnotab',
-        )
+State = namedtuple(
+    'State',
+    (
+        'argcount',
+        'nlocals',
+        'stacksize',
+        'flags',
+        'codestring',
+        'constants',
+        'names',
+        'varnames',
+        'filename',
+        'name',
+        'firstlineno',
+        'lnotab',
     )
+)
 
+
+class Code(object):
     def __init__(self, code):
         self.code = code
 
@@ -32,7 +33,7 @@ class Code(object):
         return getattr(self.code, name)
 
     def __getstate__(self):
-        state = Code.State(
+        state = State(
             argcount=self.co_argcount,
             nlocals=self.co_nlocals,
             stacksize=self.co_stacksize,
