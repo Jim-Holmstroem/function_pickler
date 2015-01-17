@@ -9,6 +9,7 @@ release name logic
 <adjective> <animal>
 
 Where <adjective>[:3] == <animal>[:3]
+
 The <adjactive> rule can be stretched to something that sounds good.
 
 Example
