@@ -69,7 +69,7 @@ def test_pickler_is_identity():
         [1, 'test'],
     ]
 
-    def test(pickler, test_subject):
+    def is_identity(pickler, test_subject):
         assert_equals(
             pickler(test_subject),
             test_subject
@@ -77,7 +77,7 @@ def test_pickler_is_identity():
 
     return imap(
         lambda *cs: tuple(chain(*cs)),
-        repeat((test, )),
+        repeat((is_identity, )),
         product(
             testing.picklers,
             test_subjects,

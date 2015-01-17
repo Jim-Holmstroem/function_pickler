@@ -3,6 +3,7 @@ from __future__ import print_function, division
 from collections import namedtuple
 import types
 
+from pickleable.utils import Base
 from pickleable.code import Code
 
 
@@ -17,7 +18,7 @@ State = namedtuple(
 )
 
 
-class Lambda(object):
+class Lambda(Base):
     def __init__(self, lambda_, context={}):
         self.lambda_ = lambda_
         self.context = context
@@ -28,6 +29,7 @@ class Lambda(object):
         return getattr(self.lambda_, name)
 
     def __call__(self, *args, **kwargs):
+        print(self.__dict__)
         return self.lambda_(*args, **kwargs)
 
     def __getstate__(self):
@@ -41,8 +43,8 @@ class Lambda(object):
         return state
 
     def __setstate__(self, state):
-        self._lambda = types.LambdaType(
-            code=state.code,
+        self.lambda_ = types.LambdaType(
+            code=state.code.code,
             globals=state.context,
             name=state.name,
             argdefs=state.argdefs,

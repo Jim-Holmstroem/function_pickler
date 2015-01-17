@@ -3,6 +3,8 @@ from __future__ import division, print_function
 from collections import namedtuple
 import types
 
+from pickleable.utils import Base
+
 
 State = namedtuple(
     'State',
@@ -23,7 +25,7 @@ State = namedtuple(
 )
 
 
-class Code(object):
+class Code(Base):
     def __init__(self, code):
         self.code = code
 
@@ -52,18 +54,18 @@ class Code(object):
 
     def __setstate__(self, state):
         self.code = types.CodeType(
-            argcount=state.argcount,
-            nlocals=state.nlocals,
-            stacksize=state.stacksize,
-            flags=state.flags,
-            codestring=state.codestring,
-            constants=state.constants,
-            names=state.names,
-            varnames=state.varnames,
-            filename=state.filename,
-            name=state.name,
-            firstlineno=state.firstlineno,
-            lnotab=state.lnotab,
-            freevars=(),  # TODO are these needed for np/pd to work?
-            cellvars=(),
+            state.argcount,
+            state.nlocals,
+            state.stacksize,
+            state.flags,
+            state.codestring,
+            state.constants,
+            state.names,
+            state.varnames,
+            state.filename,
+            state.name,
+            state.firstlineno,
+            state.lnotab,
+            (),  # TODO are these needed for np/pd to work?
+            (),  # NOTE does not support keyword arguments (and the exception message is not showing it properly)
         )
