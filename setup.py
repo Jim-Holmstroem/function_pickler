@@ -4,7 +4,7 @@ import string
 from setuptools import setup, find_packages
 
 
-VERSION = '0.1'
+VERSION = '0.2'
 DISTNAME = 'pickleable'
 DESCRIPTION = 'Picklify python objects'
 with open('README.markdown') as f:
